@@ -17,7 +17,9 @@ function Row({ title, fetchUrl, isLargeRow = false}) {
         fetchData();
     }, [fetchUrl]);
 
-   
+    function truncate(string, n) {
+        return string?.length > n ? string.substr(0, n - 1) + '...' : string;
+    }
 
     return (
         <div className="row">
@@ -34,7 +36,7 @@ function Row({ title, fetchUrl, isLargeRow = false}) {
                         src={`${base_url}${
                             isLargeRow ? movie.poster_path : movie.backdrop_path
                         }`} alt={movie.name}/>
-                    <h1 className="row__poster_title"> {movie?.title || movie?.name || movie?.original_name}</h1> 
+                    <h1 className="row__poster_title"> {truncate((movie?.title || movie?.name || movie?.original_name),15)}</h1> 
                     </div>
                 )
             ))}
